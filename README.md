@@ -45,7 +45,7 @@ Okay cool so we got that. Now calling it.
 It's all about brackets. It seems weird as shit at first but once you get it you kinda like it for some weird reason.
 I'll put an example of a crazy one from a different project below this.
 ```
-Found one from the comedy app parser. It takes a string and tries to find the src url of an <img> tag.
+Found one from the comedy app parser. It takes a string and tries to find the src url of an img html tag.
 It checks before it's done with that if it's a youtube link instead. Idk why I wrote this forever ago its stupid.
 But if it's got a youtube link it grabs the youtube still for the cell image. If all else fails it returns that @"splash.png"
 which is just a placeholder if everything else didn't work. Check it out
