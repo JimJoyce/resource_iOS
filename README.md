@@ -22,8 +22,8 @@ going to be easier for controlling sessions so everythings slowly being converte
 ####Call them methods up SAHN
 So lets say I want to see if a string is equal to another string...
 ```
-NSString *myFirstString = [NSString alloc]initWithString: @"This is really cool!";
-NSString *mySecondString = [NSString alloc]initWithString: @"This isn't!";
+NSString *myFirstString = [[NSString alloc]initWithString: @"This is really cool!"];
+NSString *mySecondString = [[NSString alloc]initWithString: @"This isn't!"];
 //Also as a side note -- i'm doing alloc (allocate space in memory) and init (initialize the object) here,
 // but most data types have convenience initalizers. Ill do an array, string, and dictionary (hash) below real quick.
 NSString *myFirstFastString = @"WOAH THAT WAS EASY!";
