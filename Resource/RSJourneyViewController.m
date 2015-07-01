@@ -8,8 +8,11 @@
 
 #import "RSJourneyViewController.h"
 #import "SessionManager.h"
+#import "RSCategoriesViewController.h"
 
-@interface RSJourneyViewController () <UINavigationControllerDelegate, UINavigationBarDelegate>
+@interface RSJourneyViewController () <UINavigationControllerDelegate, UINavigationBarDelegate> {
+    BOOL categoriesGrabbed;
+}
 
 @end
 
@@ -36,6 +39,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    categoriesGrabbed = FALSE;
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -100,14 +106,17 @@
 
 -(void)getCategoriesForJourney:(SessionManager *)session forId:(NSInteger)journeyId{
     NSString *idForRoute =  [[self.journeys objectAtIndex: journeyId] valueForKey: @"id"];
+    NSLog(@"%@", [self.journeys objectAtIndex: journeyId]);
     NSString *catUrl = [NSString stringWithFormat:
                         @"http://jim-re-source.herokuapp.com/api/journeys/%@/categories",  idForRoute];
     [session getDataForUser: catUrl withParams: @{ @"journey_id" : idForRoute }
         waitingOver:^(BOOL doneLoading) {
-        if (doneLoading && [session.userJourneys[0] isKindOfClass: [NSDictionary class]] ) {
-                [self performSegueWithIdentifier:@"categorySegue" sender: session];
+        if (doneLoading && session.userJourneys.count > 0 ) {
+            categoriesGrabbed = TRUE;
+//             [self performSegueWithIdentifier:@"categorySegue" sender: session];
         }
         else {
+            categoriesGrabbed = TRUE;
                 //deal with errors
             }
     }];
@@ -118,12 +127,14 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"categorySegue"]) {
+    if ([segue.identifier isEqualToString:@"categorySegue"] && categoriesGrabbed == TRUE) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        RSCategoriesViewController *dvc = (RSCategoriesViewController *)navigationController.topViewController;
+        dvc.categories = [NSArray arrayWithArray: self.session.userJourneys];
+        dvc.journeyTitle = [[self.journeys objectAtIndex:[self.tableView indexPathForSelectedRow].row] valueForKey:@"title"];
+    } else {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 //        UITableViewCell *cell = sender;
-//        UINavigationController *navigationController = segue.destinationViewController;
         [self getCategoriesForJourney:self.session forId:indexPath.row];
     }
 }

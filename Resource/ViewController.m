@@ -82,7 +82,6 @@ static NSString * const loginRoute = @"http://jim-re-source.herokuapp.com/api/sn
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"loginSegue"]) {
         UINavigationController *navigationController = segue.destinationViewController;
-        navigationController.navigationBar.tintColor = [UIColor blackColor];
         RSJourneyViewController *dvc = (RSJourneyViewController *)navigationController.topViewController;
         dvc.journeys = [NSArray arrayWithArray: sender.userJourneys];
         dvc.session = sender;

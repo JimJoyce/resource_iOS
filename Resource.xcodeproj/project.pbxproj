@@ -33,6 +33,7 @@
 		CC4983EC1B4275FF0086AB79 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4983DB1B4275FF0086AB79 /* UIWebView+AFNetworking.m */; };
 		CC4983F31B429CAB0086AB79 /* SessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4983F21B429CAB0086AB79 /* SessionManager.m */; };
 		CC4983F61B42B6E50086AB79 /* RSJourneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4983F51B42B6E50086AB79 /* RSJourneyViewController.m */; };
+		CC4983F91B433E0A0086AB79 /* RSCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4983F81B433E0A0086AB79 /* RSCategoriesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,8 @@
 		CC4983F21B429CAB0086AB79 /* SessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionManager.m; sourceTree = "<group>"; };
 		CC4983F41B42B6E50086AB79 /* RSJourneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSJourneyViewController.h; sourceTree = "<group>"; };
 		CC4983F51B42B6E50086AB79 /* RSJourneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSJourneyViewController.m; sourceTree = "<group>"; };
+		CC4983F71B433E0A0086AB79 /* RSCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSCategoriesViewController.h; sourceTree = "<group>"; };
+		CC4983F81B433E0A0086AB79 /* RSCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSCategoriesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +151,8 @@
 				CC4983981B42613E0086AB79 /* ViewController.m */,
 				CC4983F41B42B6E50086AB79 /* RSJourneyViewController.h */,
 				CC4983F51B42B6E50086AB79 /* RSJourneyViewController.m */,
+				CC4983F71B433E0A0086AB79 /* RSCategoriesViewController.h */,
+				CC4983F81B433E0A0086AB79 /* RSCategoriesViewController.m */,
 				CC4983F11B429CAB0086AB79 /* SessionManager.h */,
 				CC4983F21B429CAB0086AB79 /* SessionManager.m */,
 				CC49839A1B42613E0086AB79 /* Main.storyboard */,
@@ -334,6 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC4983F91B433E0A0086AB79 /* RSCategoriesViewController.m in Sources */,
 				CC4983DC1B4275FF0086AB79 /* AFHTTPRequestOperation.m in Sources */,
 				CC4983E91B4275FF0086AB79 /* UIImageView+AFNetworking.m in Sources */,
 				CC4983F31B429CAB0086AB79 /* SessionManager.m in Sources */,
