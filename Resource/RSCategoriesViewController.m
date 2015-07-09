@@ -7,6 +7,8 @@
 //
 
 #import "RSCategoriesViewController.h"
+#import "SessionManager.h"
+#import "RSNotesViewController.h"
 
 @interface RSCategoriesViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -18,6 +20,15 @@
     [super viewDidLoad];
     [self.tableView setDelegate: self];
     [self.tableView setDataSource: self];
+    self.tableView.backgroundColor = [UIColor colorWithRed: 51.0f/255.0f
+                                                     green: 51.0f/255.0f
+                                                      blue: 51.0f/255.0f alpha: 1.0f];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.navBar.title = self.journeyTitle;
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@""
+                                                                            style:UIBarButtonItemStylePlain
+                                                                           target:nil
+                                                                           action:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -43,62 +54,68 @@
     return self.categories.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 150.0f;
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100.0f;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"categoryCell" forIndexPath:indexPath];
     cell.textLabel.text = [[self.categories objectAtIndex:indexPath.row] valueForKey:@"title"];
-    
+    cell.textLabel.textColor = [UIColor colorWithRed: 90.0f/255.0f green: 204.0f/255.0f blue: 237.0f/255.0f alpha: 1.0f];
+    cell.backgroundColor = [UIColor colorWithRed: 51.0f/255.0f green: 51.0f/255.0f blue: 51.0f/255.0f alpha: 1.0f];
+    cell.textLabel.font = [UIFont systemFontOfSize:20.0f weight: UIFontWeightThin];
     
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *idForRoute =  [[self.categories objectAtIndex: indexPath.row] valueForKey: @"id"];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    [self.session getDataForUser: [self getRouteBase: indexPath]
+                      withParams: @{ @"category_id" : idForRoute } waitingOver:^(BOOL doneLoading) {
+                          
+                         if (doneLoading && self.session.userJourneys.count > 0 ) {
+                             [self performSegueWithIdentifier:@"noteSegue" sender: cell];
+                         }
+                         else if (doneLoading && self.session.userJourneys.count == 0){
+//                             [self alertUserThereAreNoCategories:[self.categories
+//                                                                  objectAtIndex:indexPath.row]];
+                         }
+                         else {
+//                             [self alertUserOfError];
+                         }
+                     }];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+-(NSString *)getRouteBase:(NSIndexPath *)indexPath {
+    NSString *route = [NSString stringWithFormat:
+                       @"http://jim-re-source.herokuapp.com/api/journeys/%@/categories/%@/notes",
+                       self.journeyId,
+                       [[self.categories objectAtIndex:indexPath.row] valueForKey:@"id"]];
+    return route;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"noteSegue"]) {
+        UITableViewCell *cell = sender;
+        UINavigationController *navigationController = segue.destinationViewController;
+        RSNotesViewController *dvc = (RSNotesViewController *)navigationController.topViewController;
+        dvc.notes = [NSArray arrayWithArray: self.session.userJourneys];
+        dvc.category = cell.textLabel.text;
+        dvc.urlBase = [self getRouteBase:[self.tableView indexPathForSelectedRow]];
+        dvc.session = self.session;
+        dvc.journeyId = self.journeyId;
+        dvc.categoryId = [[self.categories objectAtIndex:[self.tableView indexPathForSelectedRow].row] valueForKey:@"id"];
+    }
 }
-*/
+
 
 @end

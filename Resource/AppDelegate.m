@@ -25,7 +25,15 @@
     UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
     //navigationBarAppearance.barStyle = UIBarStyleBlack;
     navigationBarAppearance.barTintColor = [UIColor colorWithRed: 52.0f/255.0f green: 72.0f/255.0f blue: 86.0f/255.0f alpha: 1.0f];
+    navigationBarAppearance.titleTextAttributes = @{NSFontAttributeName:
+                                                        [UIFont systemFontOfSize:20.0f
+                                                                          weight:UIFontWeightLight],
+                                                    NSForegroundColorAttributeName: [UIColor whiteColor]
+                                                    };
     navigationBarAppearance.translucent = NO;
+    navigationBarAppearance.tintColor = [UIColor colorWithRed: 82.0f/255.0f
+                                                        green: 102.0f/255.0f
+                                                         blue: 116.0f/255.0f alpha: 1.0f];
     
 }
 

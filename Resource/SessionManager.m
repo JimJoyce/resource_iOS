@@ -50,6 +50,22 @@ static NSString * const journeyRoute = @"http://jim-re-source.herokuapp.com/api/
     self.userJourneys = array;
 }
 
+-(void)addNewNote:(NSString *)postUrl withParams:(NSDictionary *)params whileWaiting:(objectCreated)requestDone{
+    AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
+    
+    [requestManager POST:postUrl parameters:params success:^(AFHTTPRequestOperation *operation,
+                                                             NSDictionary *response) {
+        //deal with success
+        NSLog(@"success!");
+        requestDone(YES);
+    } failure:^(AFHTTPRequestOperation * operation, NSError *error) {
+        //deal with error
+        NSLog(@"failed: %@", [operation responseString]);
+        requestDone(YES);
+    }];
+    
+}
+
 
 
 +(NSString *)getUserName {

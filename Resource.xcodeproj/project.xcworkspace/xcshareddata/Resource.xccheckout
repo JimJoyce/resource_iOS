@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>ED070A43-0E13-4FF4-A45C-B2AC85407FD8</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Resource</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>65A0782894C72FECA25A0A27E4F1370EE85F7BEF</key>
 		<string>https://github.com/JimJoyce/resource_iOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Resource.xcodeproj/project.xcworkspace</string>
+	<string>Resource.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>65A0782894C72FECA25A0A27E4F1370EE85F7BEF</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>65A0782894C72FECA25A0A27E4F1370EE85F7BEF</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Resource</string>
+			<string>resource_iOS</string>
 		</dict>
 	</array>
 </dict>

@@ -66,12 +66,13 @@ static NSString * const loginRoute = @"http://jim-re-source.herokuapp.com/api/sn
     [session getDataForUser:@"http://jim-re-source.herokuapp.com/api/journeys" withParams:@{@"user_id" : userId}  waitingOver:^(BOOL doneLoading) {
         
         if (doneLoading) {
-            if ([session.userJourneys[0] isKindOfClass: [NSDictionary class]]) {
-                [self performSegueWithIdentifier:@"loginSegue" sender: session];
-            }
-            else {
-                //deal with errors
-            }
+            [self performSegueWithIdentifier:@"loginSegue" sender: session];
+//            if ([session.userJourneys[0] isKindOfClass: [NSDictionary class]]) {
+//                
+//            }
+//            else {
+//                //deal with errors
+//            }
         }
         
     }];

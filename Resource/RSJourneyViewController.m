@@ -26,6 +26,10 @@
                                                      green: 51.0f/255.0f
                                                      blue: 51.0f/255.0f alpha: 1.0f];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@""
+                                                                            style:UIBarButtonItemStylePlain
+                                                                           target:nil
+                                                                           action:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -39,9 +43,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    categoriesGrabbed = FALSE;
-}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -69,6 +70,65 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *idForRoute =  [[self.journeys objectAtIndex: indexPath.row] valueForKey: @"id"];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSString *catUrl = [NSString stringWithFormat:
+                        @"http://jim-re-source.herokuapp.com/api/journeys/%@/categories",  idForRoute];
+    [self.session getDataForUser: catUrl withParams: @{ @"journey_id" : idForRoute }
+                waitingOver:^(BOOL doneLoading) {
+                    if (doneLoading && self.session.userJourneys.count > 0 ) {
+                        [self performSegueWithIdentifier:@"categorySegue" sender: cell];
+                    }
+                    else if (doneLoading && self.session.userJourneys.count == 0){
+                        [self alertUserThereAreNoCategories:[self.journeys
+                                                             objectAtIndex:indexPath.row]];
+                    }
+                    else {
+                        [self alertUserOfError];
+                    }
+                }];
+}
+
+-(void)alertUserThereAreNoCategories:(NSDictionary *)journey{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Uh oh!"
+                                                                   message:@"Looks like there are no Categories for this journey. Do you want to add one?"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Yes"
+                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
+    
+    UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"No, thanks"
+                                                        style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                             [self.tableView deselectRowAtIndexPath:
+                                                              [self.tableView indexPathForSelectedRow]
+                                                                                        animated:YES];
+                                                        }];
+    [alert addAction:cancelButton];
+    [alert addAction:yesButton];
+    [self presentViewController:alert
+                        animated:YES
+                      completion:nil];
+}
+
+
+-(void)alertUserOfError{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Uh oh!"
+                                                                   message:@"Looks like there are no Categories for this journey. Do you want to add one?"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Okay"
+                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                                            [self.tableView deselectRowAtIndexPath:
+                                                            [self.tableView indexPathForSelectedRow]
+                                                                                          animated:YES];
+                                                        }];
+    [alert addAction:yesButton];
+    
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -104,38 +164,19 @@
 }
 */
 
--(void)getCategoriesForJourney:(SessionManager *)session forId:(NSInteger)journeyId{
-    NSString *idForRoute =  [[self.journeys objectAtIndex: journeyId] valueForKey: @"id"];
-    NSLog(@"%@", [self.journeys objectAtIndex: journeyId]);
-    NSString *catUrl = [NSString stringWithFormat:
-                        @"http://jim-re-source.herokuapp.com/api/journeys/%@/categories",  idForRoute];
-    [session getDataForUser: catUrl withParams: @{ @"journey_id" : idForRoute }
-        waitingOver:^(BOOL doneLoading) {
-        if (doneLoading && session.userJourneys.count > 0 ) {
-            categoriesGrabbed = TRUE;
-//             [self performSegueWithIdentifier:@"categorySegue" sender: session];
-        }
-        else {
-            categoriesGrabbed = TRUE;
-                //deal with errors
-            }
-    }];
-}
-
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"categorySegue"] && categoriesGrabbed == TRUE) {
+    if ([segue.identifier isEqualToString:@"categorySegue"]) {
         UINavigationController *navigationController = segue.destinationViewController;
         RSCategoriesViewController *dvc = (RSCategoriesViewController *)navigationController.topViewController;
+        UITableViewCell *cell = sender;
         dvc.categories = [NSArray arrayWithArray: self.session.userJourneys];
         dvc.journeyTitle = [[self.journeys objectAtIndex:[self.tableView indexPathForSelectedRow].row] valueForKey:@"title"];
-    } else {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        UITableViewCell *cell = sender;
-        [self getCategoriesForJourney:self.session forId:indexPath.row];
+        dvc.journeyId = [[self.journeys objectAtIndex:[self.tableView indexPathForCell:cell].row] valueForKey:@"id"];
+        dvc.session = self.session;
     }
 }
 

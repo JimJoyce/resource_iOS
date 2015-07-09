@@ -15,5 +15,6 @@
 @property (strong, nonatomic) SessionManager *session;
 
 @property (strong, nonatomic) IBOutlet UINavigationItem *navBar;
+typedef void(^requestFinished)(BOOL);
 
 @end

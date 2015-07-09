@@ -34,6 +34,9 @@
 		CC4983F31B429CAB0086AB79 /* SessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4983F21B429CAB0086AB79 /* SessionManager.m */; };
 		CC4983F61B42B6E50086AB79 /* RSJourneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4983F51B42B6E50086AB79 /* RSJourneyViewController.m */; };
 		CC4983F91B433E0A0086AB79 /* RSCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4983F81B433E0A0086AB79 /* RSCategoriesViewController.m */; };
+		CCDFC1DC1B4E2A3D00991651 /* RSNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFC1DB1B4E2A3D00991651 /* RSNotesViewController.m */; };
+		CCDFC1DF1B4E493400991651 /* RSAddNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFC1DE1B4E493400991651 /* RSAddNoteViewController.m */; };
+		CCDFC1E21B4E821B00991651 /* RSShowNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFC1E11B4E821B00991651 /* RSShowNoteViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,12 @@
 		CC4983F51B42B6E50086AB79 /* RSJourneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSJourneyViewController.m; sourceTree = "<group>"; };
 		CC4983F71B433E0A0086AB79 /* RSCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSCategoriesViewController.h; sourceTree = "<group>"; };
 		CC4983F81B433E0A0086AB79 /* RSCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSCategoriesViewController.m; sourceTree = "<group>"; };
+		CCDFC1DA1B4E2A3D00991651 /* RSNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSNotesViewController.h; path = ../RSNotesViewController.h; sourceTree = "<group>"; };
+		CCDFC1DB1B4E2A3D00991651 /* RSNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSNotesViewController.m; path = ../RSNotesViewController.m; sourceTree = "<group>"; };
+		CCDFC1DD1B4E493400991651 /* RSAddNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSAddNoteViewController.h; sourceTree = "<group>"; };
+		CCDFC1DE1B4E493400991651 /* RSAddNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSAddNoteViewController.m; sourceTree = "<group>"; };
+		CCDFC1E01B4E821B00991651 /* RSShowNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSShowNoteViewController.h; sourceTree = "<group>"; };
+		CCDFC1E11B4E821B00991651 /* RSShowNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSShowNoteViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,9 +162,15 @@
 				CC4983F51B42B6E50086AB79 /* RSJourneyViewController.m */,
 				CC4983F71B433E0A0086AB79 /* RSCategoriesViewController.h */,
 				CC4983F81B433E0A0086AB79 /* RSCategoriesViewController.m */,
+				CCDFC1DA1B4E2A3D00991651 /* RSNotesViewController.h */,
+				CCDFC1DB1B4E2A3D00991651 /* RSNotesViewController.m */,
+				CCDFC1E01B4E821B00991651 /* RSShowNoteViewController.h */,
+				CCDFC1E11B4E821B00991651 /* RSShowNoteViewController.m */,
 				CC4983F11B429CAB0086AB79 /* SessionManager.h */,
 				CC4983F21B429CAB0086AB79 /* SessionManager.m */,
 				CC49839A1B42613E0086AB79 /* Main.storyboard */,
+				CCDFC1DD1B4E493400991651 /* RSAddNoteViewController.h */,
+				CCDFC1DE1B4E493400991651 /* RSAddNoteViewController.m */,
 				CC49839D1B42613E0086AB79 /* Images.xcassets */,
 				CC49839F1B42613E0086AB79 /* LaunchScreen.xib */,
 				CC4983901B42613E0086AB79 /* Supporting Files */,
@@ -346,8 +361,10 @@
 				CC4983991B42613E0086AB79 /* ViewController.m in Sources */,
 				CC4983DD1B4275FF0086AB79 /* AFHTTPRequestOperationManager.m in Sources */,
 				CC4983EA1B4275FF0086AB79 /* UIProgressView+AFNetworking.m in Sources */,
+				CCDFC1DF1B4E493400991651 /* RSAddNoteViewController.m in Sources */,
 				CC4983DF1B4275FF0086AB79 /* AFNetworkReachabilityManager.m in Sources */,
 				CC4983E31B4275FF0086AB79 /* AFURLResponseSerialization.m in Sources */,
+				CCDFC1E21B4E821B00991651 /* RSShowNoteViewController.m in Sources */,
 				CC4983E11B4275FF0086AB79 /* AFURLConnectionOperation.m in Sources */,
 				CC4983E81B4275FF0086AB79 /* UIButton+AFNetworking.m in Sources */,
 				CC4983E61B4275FF0086AB79 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -362,6 +379,7 @@
 				CC4983E41B4275FF0086AB79 /* AFURLSessionManager.m in Sources */,
 				CC4983961B42613E0086AB79 /* AppDelegate.m in Sources */,
 				CC4983931B42613E0086AB79 /* main.m in Sources */,
+				CCDFC1DC1B4E2A3D00991651 /* RSNotesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +574,7 @@
 				CC4983B21B42613E0086AB79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CC4983B31B42613E0086AB79 /* Build configuration list for PBXNativeTarget "ResourceTests" */ = {
 			isa = XCConfigurationList;
@@ -564,6 +583,7 @@
 				CC4983B51B42613E0086AB79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
