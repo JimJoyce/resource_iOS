@@ -7,8 +7,8 @@ email: team@resource.com
 password: password
 
 progress so far:
-![](./images/re1.png =300x532)
-![](./images/re2.png =300x532)
-![](./images/re3.png =300x532)
-![](./images/re4.png =300x532)
-![](./images/re5.png =300x532)
+<img src="./images/re1.png =300x532" width="300" height="532">
+<img src="./images/re2.png =300x532" width="300" height="532">
+<img src="./images/re3.png =300x532" width="300" height="532">
+<img src="./images/re4.png =300x532" width="300" height="532">
+<img src="./images/re5.png =300x532" width="300" height="532">
