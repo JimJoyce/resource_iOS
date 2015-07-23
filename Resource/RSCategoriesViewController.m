@@ -9,6 +9,7 @@
 #import "RSCategoriesViewController.h"
 #import "SessionManager.h"
 #import "RSNotesViewController.h"
+#import "JJPopupForm.h"
 
 @interface RSCategoriesViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -29,12 +30,22 @@
                                                                             style:UIBarButtonItemStylePlain
                                                                            target:nil
                                                                            action:nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                          target:self
+                                                                                          action:@selector(addNewCategory)];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)addNewCategory {
+    JJPopupForm *newCategoryForm = [[JJPopupForm alloc]initWithView:self.view withTitle:@"Category"
+                                                     andSubmitTitle:@"Submit"
+                                                     andCancelTitle:@"Cancel"];
+    newCategoryForm.journeyId = self.journeyId;
 }
 
 - (void)didReceiveMemoryWarning {

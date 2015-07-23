@@ -82,6 +82,13 @@
     
 }
 
+-(NSString *)getSynopsisText:(NSString *)apiText {
+    if ([apiText isKindOfClass:[NSNull class]]) {
+        return @"Synopsis not yet added!";
+    }
+    return apiText;
+}
+
 
 #pragma mark - Navigation
 
@@ -95,13 +102,12 @@
         destinationViewController.session = self.session;
         destinationViewController.categoryId = self.categoryId;
         destinationViewController.journeyId = self.journeyId;
-        //deal with stuff
     }
     if ([segue.identifier isEqualToString:@"showNoteSegue"]) {
         RSShowNoteViewController *dvc = (RSShowNoteViewController *)segue.destinationViewController;
         NSDictionary *noteObject = sender;
         dvc.noteTitle = [noteObject valueForKey:@"title"];
-        dvc.synopsisText = [noteObject valueForKey:@"synopsis"];
+        dvc.synopsisText = [self getSynopsisText:[noteObject valueForKey:@"synopsis"]];
         dvc.codeText = [noteObject valueForKey:@"code"];
     }
 }

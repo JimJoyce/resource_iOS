@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC2667161B61083500E3579C /* JJPopupForm.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2667151B61083500E3579C /* JJPopupForm.m */; };
 		CC4983931B42613E0086AB79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4983921B42613E0086AB79 /* main.m */; };
 		CC4983961B42613E0086AB79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4983951B42613E0086AB79 /* AppDelegate.m */; };
 		CC4983991B42613E0086AB79 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4983981B42613E0086AB79 /* ViewController.m */; };
@@ -50,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC2667141B61083500E3579C /* JJPopupForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJPopupForm.h; sourceTree = "<group>"; };
+		CC2667151B61083500E3579C /* JJPopupForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJPopupForm.m; sourceTree = "<group>"; };
 		CC49838D1B42613E0086AB79 /* Resource.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Resource.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC4983911B42613E0086AB79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC4983921B42613E0086AB79 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -131,6 +134,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC2667171B61083D00E3579C /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				CC2667141B61083500E3579C /* JJPopupForm.h */,
+				CC2667151B61083500E3579C /* JJPopupForm.m */,
+				CC4983B61B4275FF0086AB79 /* AFNetworking */,
+				CC4983CA1B4275FF0086AB79 /* UIKit+AFNetworking */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		CC4983841B42613E0086AB79 = {
 			isa = PBXGroup;
 			children = (
@@ -152,8 +166,7 @@
 		CC49838F1B42613E0086AB79 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				CC4983B61B4275FF0086AB79 /* AFNetworking */,
-				CC4983CA1B4275FF0086AB79 /* UIKit+AFNetworking */,
+				CC2667171B61083D00E3579C /* Libraries */,
 				CC4983941B42613E0086AB79 /* AppDelegate.h */,
 				CC4983951B42613E0086AB79 /* AppDelegate.m */,
 				CC4983971B42613E0086AB79 /* ViewController.h */,
@@ -374,6 +387,7 @@
 				CC4983DE1B4275FF0086AB79 /* AFHTTPSessionManager.m in Sources */,
 				CC4983E71B4275FF0086AB79 /* UIAlertView+AFNetworking.m in Sources */,
 				CC4983F61B42B6E50086AB79 /* RSJourneyViewController.m in Sources */,
+				CC2667161B61083500E3579C /* JJPopupForm.m in Sources */,
 				CC4983E21B4275FF0086AB79 /* AFURLRequestSerialization.m in Sources */,
 				CC4983E51B4275FF0086AB79 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				CC4983E41B4275FF0086AB79 /* AFURLSessionManager.m in Sources */,

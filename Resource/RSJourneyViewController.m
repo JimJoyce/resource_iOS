@@ -9,6 +9,7 @@
 #import "RSJourneyViewController.h"
 #import "SessionManager.h"
 #import "RSCategoriesViewController.h"
+#import "JJPopupForm.h"
 
 @interface RSJourneyViewController () <UINavigationControllerDelegate, UINavigationBarDelegate> {
     BOOL categoriesGrabbed;
@@ -36,7 +37,10 @@
 }
 
 -(void)addNewJourney {
-    
+    JJPopupForm *newJourneyForm = [[JJPopupForm alloc]initWithView:self.view
+                                                         withTitle:@"Journey"
+                                                    andSubmitTitle:@"Submit"
+                                                    andCancelTitle:@"Cancel"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,7 +101,12 @@
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Yes"
-                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
+                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                                            [self addNewJourney];
+                                                            [self.tableView deselectRowAtIndexPath:
+                                                             [self.tableView indexPathForSelectedRow]
+                                                                                          animated:YES];
+                                                        }];
     
     UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"No, thanks"
                                                         style:UIAlertActionStyleCancel

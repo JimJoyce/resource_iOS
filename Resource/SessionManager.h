@@ -22,6 +22,7 @@ typedef void(^requestFinished)(BOOL);
 typedef void(^objectCreated)(BOOL);
 -(void)getDataForUser:(NSString *)atUrl forType:(int)queryType withParams:(NSDictionary *)params waitingOver:(requestFinished)requestLoading;
 -(void)addNewNote:(NSString *)postUrl withParams:(NSDictionary *)params whileWaiting:(objectCreated)requestDone;
+-(void)addNewJourney:(NSString *)postUrl withParams:(NSDictionary *)params whileWaiting:(objectCreated)requestDone;
 
 +(SessionManager *)sharedInstance;
 -(void)setUserConstants:(NSString *)responseUserName andId:(NSString *)responseUserId andToken:(NSString *)responseAuthToken;
