@@ -18,36 +18,57 @@ static NSString * const journeyRoute = @"http://jim-re-source.herokuapp.com/api/
 
 @implementation SessionManager
 
--(id) initWithUserDetails:(NSString *)responseUserName andId:(NSString *)responseUserId andToken:(NSString *)responseAuthToken {
-    self = [super init];
-    if (self) {
-        userName = responseUserName;
-        userId = responseUserId;
-        authToken = responseAuthToken;
-        NSLog(@"token: %@, name: %@, id: %@", authToken, userName, userId);
-    }
-    return self;
++(SessionManager *)sharedInstance {
+    static SessionManager *instance;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[SessionManager alloc]init];
+    });
+    
+    return instance;
 }
 
+-(void)setUserConstants:(NSString *)responseUserName andId:(NSString *)responseUserId andToken:(NSString *)responseAuthToken {
+    userName = responseUserName;
+    userId = responseUserId;
+    authToken = responseAuthToken;
+//    JOURNEY = 1;
+//    CATEGORY = 2;
+//    NOTES = 3;
+    NSLog(@"token: %@, name: %@, id: %@", authToken, userName, userId);
+}
 
-
--(void)getDataForUser:(NSString *)atUrl withParams:(NSDictionary *)params waitingOver:(requestFinished)requestLoading {
+-(void)getDataForUser:(NSString *)atUrl forType:(int)queryType withParams:(NSDictionary *)params waitingOver:(requestFinished)requestLoading {
     AFHTTPRequestOperationManager *requestManager = [AFHTTPRequestOperationManager manager];
     [requestManager GET: atUrl parameters: params success:^(AFHTTPRequestOperation *operation, NSArray *successResponse) {
 //        NSLog(@"SUCCESS!  Here's some results: %@", successResponse);
-        [self returnDataFromAsyncBlock:successResponse];
+        [self returnDataFromAsyncBlock:successResponse forData:queryType];
         requestLoading(YES);
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self returnDataFromAsyncBlock:@[@"error"]];
+        [self returnDataFromAsyncBlock:@[@"error"] forData:queryType];
         NSLog(@"ERROR: %@", error);
         requestLoading(YES);
     }];
 }
 
--(void)returnDataFromAsyncBlock:(NSArray *)array {
+-(void)returnDataFromAsyncBlock:(NSArray *)array forData:(int)queryType {
 //    NSLog(@"from the next method! -- %@", array);
-    self.userJourneys = array;
+    switch (queryType) {
+        case 1:
+            self.journeys = array;
+            break;
+        case 2:
+            self.categories = array;
+            break;
+        case 3:
+            self.notes = array;
+            break;
+        default:
+            nil;
+            break;
+    }
 }
 
 -(void)addNewNote:(NSString *)postUrl withParams:(NSDictionary *)params whileWaiting:(objectCreated)requestDone{
@@ -81,7 +102,7 @@ static NSString * const journeyRoute = @"http://jim-re-source.herokuapp.com/api/
 }
 
 -(NSArray *)getUserJourneys {
-    return self.userJourneys;
+    return self.journeys;
 }
 
 +(NSArray *)getUserCategories {

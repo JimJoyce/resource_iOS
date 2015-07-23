@@ -73,13 +73,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *idForRoute =  [[self.categories objectAtIndex: indexPath.row] valueForKey: @"id"];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    [self.session getDataForUser: [self getRouteBase: indexPath]
+    [self.session getDataForUser: [self getRouteBase: indexPath] forType:3
                       withParams: @{ @"category_id" : idForRoute } waitingOver:^(BOOL doneLoading) {
                           
-                         if (doneLoading && self.session.userJourneys.count > 0 ) {
+                         if (doneLoading && self.session.notes.count > 0 ) {
                              [self performSegueWithIdentifier:@"noteSegue" sender: cell];
                          }
-                         else if (doneLoading && self.session.userJourneys.count == 0){
+                         else if (doneLoading && self.session.notes.count == 0){
 //                             [self alertUserThereAreNoCategories:[self.categories
 //                                                                  objectAtIndex:indexPath.row]];
                          }
@@ -108,7 +108,7 @@
         UITableViewCell *cell = sender;
         UINavigationController *navigationController = segue.destinationViewController;
         RSNotesViewController *dvc = (RSNotesViewController *)navigationController.topViewController;
-        dvc.notes = [NSArray arrayWithArray: self.session.userJourneys];
+        dvc.notes = [NSArray arrayWithArray: self.session.notes];
         dvc.category = cell.textLabel.text;
         dvc.urlBase = [self getRouteBase:[self.tableView indexPathForSelectedRow]];
         dvc.session = self.session;

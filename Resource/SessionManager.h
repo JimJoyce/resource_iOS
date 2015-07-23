@@ -12,11 +12,19 @@
 extern NSString *userId;
 extern NSString *userName;
 extern NSString *authToken;
-@property (strong, nonatomic) NSArray *userJourneys;
+extern int JOURNEY;
+extern int CATEGORY;
+extern int NOTES;
+@property (strong, nonatomic) NSArray *journeys;
+@property (strong, nonatomic) NSArray *categories;
+@property (strong, nonatomic) NSArray *notes;
 typedef void(^requestFinished)(BOOL);
 typedef void(^objectCreated)(BOOL);
--(void)getDataForUser:(NSString *)atUrl withParams:(NSDictionary *)params waitingOver:(requestFinished)requestLoading;
+-(void)getDataForUser:(NSString *)atUrl forType:(int)queryType withParams:(NSDictionary *)params waitingOver:(requestFinished)requestLoading;
 -(void)addNewNote:(NSString *)postUrl withParams:(NSDictionary *)params whileWaiting:(objectCreated)requestDone;
+
++(SessionManager *)sharedInstance;
+-(void)setUserConstants:(NSString *)responseUserName andId:(NSString *)responseUserId andToken:(NSString *)responseAuthToken;
 
 +(NSString *)getUserId;
 +(NSString *)getUserName;
@@ -24,5 +32,4 @@ typedef void(^objectCreated)(BOOL);
 -(NSArray *)getUserJourneys;
 +(NSArray *)getUserCategories;
 
--(id) initWithUserDetails:(NSString *)userName andId:(NSString *)userId andToken:(NSString *)userToken;
 @end

@@ -79,6 +79,7 @@
 
 -(void)addNewNote {
     [self performSegueWithIdentifier:@"addNoteSegue" sender:self];
+    
 }
 
 

@@ -75,12 +75,12 @@
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     NSString *catUrl = [NSString stringWithFormat:
                         @"http://jim-re-source.herokuapp.com/api/journeys/%@/categories",  idForRoute];
-    [self.session getDataForUser: catUrl withParams: @{ @"journey_id" : idForRoute }
+    [self.session getDataForUser: catUrl forType:2 withParams: @{ @"journey_id" : idForRoute }
                 waitingOver:^(BOOL doneLoading) {
-                    if (doneLoading && self.session.userJourneys.count > 0 ) {
+                    if (doneLoading && self.session.categories.count > 0 ) {
                         [self performSegueWithIdentifier:@"categorySegue" sender: cell];
                     }
-                    else if (doneLoading && self.session.userJourneys.count == 0){
+                    else if (doneLoading && self.session.categories.count == 0){
                         [self alertUserThereAreNoCategories:[self.journeys
                                                              objectAtIndex:indexPath.row]];
                     }
@@ -173,7 +173,7 @@
         UINavigationController *navigationController = segue.destinationViewController;
         RSCategoriesViewController *dvc = (RSCategoriesViewController *)navigationController.topViewController;
         UITableViewCell *cell = sender;
-        dvc.categories = [NSArray arrayWithArray: self.session.userJourneys];
+        dvc.categories = [NSArray arrayWithArray: self.session.categories];
         dvc.journeyTitle = [[self.journeys objectAtIndex:[self.tableView indexPathForSelectedRow].row] valueForKey:@"title"];
         dvc.journeyId = [[self.journeys objectAtIndex:[self.tableView indexPathForCell:cell].row] valueForKey:@"id"];
         dvc.session = self.session;
